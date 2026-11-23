@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitong Li — Photography</title>
+
+    <style>
+        /* =========================
+   BASIC
+========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #fff;
+            color: #222;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        /* =========================
+   MAIN LAYOUT
+========================= */
+
+        .site {
+            width: min(716px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        header {
+            height: 58px;
+            border-bottom: 1px solid #dedede;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .site-name {
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 23px;
+        }
+
+        nav a {
+            color: #555;
+            transition: color 0.15s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #000;
+        }
+
+        main {
+            padding-top: 62px;
+            padding-bottom: 100px;
+        }
+
+        /* =========================
+   PHOTOGRAPHY DIRECTORY
+========================= */
+
+        .directory {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 54px;
+            row-gap: 28px;
+            align-items: start;
+        }
+
+        .project {
+            cursor: pointer;
+            min-width: 0;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f4f4f4;
+        }
+
+        .project-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.2s ease;
+        }
+
+        .project:hover .project-image img {
+            opacity: 0.82;
+        }
+
+        .project-title {
+            margin-top: 9px;
+            color: #444;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        /* =========================
+   PHOTO VIEWER
+========================= */
+
+        .viewer {
+            width: 100%;
+            text-align: center;
+        }
+
+        .viewer-heading {
+            margin: 0 0 30px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #444;
+        }
+
+        .photo-stage {
+            width: fit-content;
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .photo-stage img {
+            display: block;
+            max-width: 100%;
+            max-height: 70vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .photo-info {
+            width: fit-content;
+            max-width: 100%;
+            margin: 12px auto 0;
+            color: #777;
+            font-size: 10px;
+            line-height: 1.7;
+            text-align: right;
+        }
+
+        .photo-wrapper {
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .photo-wrapper img {
+            display: block;
+            max-width: 100%;
+            max-height: 70vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .photo-info {
+            width: 100%;
+            margin-top: 12px;
+            text-align: right;
+            color: #777;
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        .photo-navigation {
+            margin-top: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .photo-navigation button,
+        .back-link {
+            border: 0;
+            padding: 0;
+            background: transparent;
+            color: #555;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .photo-navigation button:hover,
+        .back-link:hover {
+            color: #000;
+        }
+
+        .photo-navigation button:disabled {
+            color: #ccc;
+            cursor: default;
+        }
+
+        .viewer-back {
+            margin-top: 22px;
+        }
+
+        /* =========================
+   WRITING
+========================= */
+
+        .writing-list {
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .writing-viewer {
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .writing-content {
+            font-size: 13px;
+            line-height: 1.9;
+            color: #333;
+            white-space: pre-line;
+        }
+
+        .writing-navigation {
+            margin-top: 42px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        /* =========================
+   RESPONSIVE
+========================= */
+
+        @media (max-width: 600px) {
+            .site {
+                width: calc(100% - 36px);
+            }
+
+            header {
+                gap: 18px;
+            }
+
+            nav {
+                gap: 14px;
+            }
+
+            .directory {
+                grid-template-columns: repeat(2, 1fr);
+                column-gap: 24px;
+                row-gap: 28px;
+            }
+
+            .project-image {
+                height: 105px;
+            }
+
+            main {
+                padding-top: 38px;
+            }
+
+            .photo-stage {
+                min-height: 220px;
+            }
+
+            .photo-stage img {
+                max-height: 65vh;
+            }
+        }
+
+        @media (max-width: 360px) {
+            header {
+                gap: 12px;
+            }
+
+            nav {
+                gap: 10px;
+            }
+
+            .site-name {
+                font-size: 13px;
+            }
+
+            nav a {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="site">
+
+        <!-- HEADER -->
+        <header>
+            <a class="site-name" href="#" onclick="showPhotography(); return false;">
+                Mitong Li
+            </a>
+
+            <nav>
+                <a href="#" id="nav-photography" onclick="showPhotography(); return false;">
+                    Photography
+                </a>
+
+                <a href="#" id="nav-writing" onclick="showWriting(); return false;">
+                    Writing
+                </a>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main id="main"></main>
+
+    </div>
+
+
+    <script>
+
+        /* ==================================================
+           CONTENT DATABASE
+        
+           Add or edit your projects and photographs here.
+           Use paths relative to index.html.
+        ================================================== */
+
+        const projects = [
+
+            {
+                id: "28mm",
+                title: "28mm",
+                cover: "./image/28mm/cover.png",
+
+                photographs: [
+                    {
+                        src: "./image/28mm/01.png", info: "Suburban Shanghai, Oct. 2026"
+                    },
+                    {
+                        src: "./image/28mm/02.png", info: "Suburban Shanghai, Oct. 2026"
+                    },
+                    {
+                        src: "./image/28mm/03.png", info: "Suburban Shanghai, Oct. 2026"
+                    },
+                    {
+                        src: "./image/28mm/04.png", info: "Disneyland Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/28mm/05.png", info: "Disneyland Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/28mm/06.png", info: "Disneyland Shanghai, Nov. 2026"
+                    },
+                ]
+            },
+
+            {
+                id: "40mm",
+                title: "40mm",
+                cover: "./image/40mm/cover.png",
+
+                photographs: [
+                    {
+                        src: "./image/40mm/01.png", info: "Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/40mm/02.png", info: "Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/40mm/03.png", info: "Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/40mm/04.png", info: "Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/40mm/05.png", info: "Suburban Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/40mm/06.png", info: "Suburban Shanghai, Nov. 2026"
+                    },
+                ]
+            },
+
+            {
+                id: "winter",
+                title: "Winter as it is",
+                cover: "./image/winter/cover.png",
+
+                photographs: [
+                    {
+                        src: "./image/winter/01.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/02.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/03.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/04.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/05.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/06.png", info: "Suburban Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/07.png", info: "Suburban Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/08.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/09.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/10.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/11.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/12.png", info: "School, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/13.png", info: "School, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/14.png", info: "School, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/15.png", info: "School, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/16.png", info: "School, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/17.png", info: "School, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/18.png", info: "Suburban Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/19.png", info: "Suburban Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/20.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/21.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/22.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/23.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/24.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/25.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/26.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/27.png", info: "School, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/28.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                    {
+                        src: "./image/winter/29.png", info: "Dorm, Shanghai, Nov. 2026"
+                    },
+                ]
+            },
+
+            /*
+            ADD MORE PROJECTS HERE:
+        
+            {
+                id: "winter",
+                title: "Winter as it is",
+                cover: "./image/winter/cover.png",
+        
+                photographs: [
+                    {
+                        src: "./image/winter/01.png", info: ""
+                    }
+                ]
+            },
+            */
+
+        ];
+
+
+        /* ==================================================
+           WRITING DATABASE
+        ================================================== */
+
+        const writings = [
+
+            {
+                content: `This is a sample writing.
+
+Replace this text with your own writing.
+
+You can use multiple paragraphs by separating
+them with line breaks.`
+            },
+
+            {
+                content: `Another piece of writing.
+
+The writing section uses the same simple
+previous and next navigation.`
+            }
+
+        ];
+
+
+        /* ==================================================
+           STATE
+        ================================================== */
+
+        let currentPage = "directory";
+        let currentProject = null;
+        let currentPhotoIndex = 0;
+        let currentWritingIndex = 0;
+
+        const main = document.getElementById("main");
+
+
+        /* ==================================================
+           NAVIGATION HELPERS
+        ================================================== */
+
+        function setActiveNav(page) {
+
+            document.getElementById("nav-photography")
+                .classList.toggle("active", page === "photography");
+
+            document.getElementById("nav-writing")
+                .classList.toggle("active", page === "writing");
+        }
+
+
+        /* ==================================================
+           PHOTOGRAPHY DIRECTORY
+        ================================================== */
+
+        function showPhotography() {
+
+            currentPage = "directory";
+            currentProject = null;
+
+            setActiveNav("photography");
+
+            let html = `<div class="directory">`;
+
+            projects.forEach(project => {
+
+                html += `
+            <div class="project"
+                 onclick="openProject('${project.id}')">
+
+                <div class="project-image">
+                    <img
+                        src="${project.cover}"
+                        alt="${project.title}"
+                        loading="lazy"
+                    >
+                </div>
+
+                <div class="project-title">
+                    ${project.title}
+                </div>
+
+            </div>
+        `;
+            });
+
+            html += `</div>`;
+
+            main.innerHTML = html;
+
+            window.scrollTo(0, 0);
+        }
+
+
+        /* ==================================================
+           OPEN A PROJECT
+        ================================================== */
+
+        function openProject(projectId) {
+
+            currentProject = projects.find(
+                project => project.id === projectId
+            );
+
+            if (!currentProject) return;
+
+            currentPhotoIndex = 0;
+
+            showPhoto();
+        }
+
+
+        /* ==================================================
+           PHOTO VIEWER
+        ================================================== */
+
+        function showPhoto() {
+
+            currentPage = "photo";
+
+            setActiveNav("photography");
+
+            const photographs = currentProject.photographs;
+
+            const photo = photographs[currentPhotoIndex];
+
+            const info = [
+                photo.info
+            ]
+
+            main.innerHTML = `
+
+        <div class="viewer">
+
+            <div class="photo-stage">
+                <div class="photo-wrapper">
+                    <img src="${photo.src}" alt="">
+
+                    ${info ? `
+                        <div class="photo-info">${info}</div>
+                    ` : ""}
+                </div>
+            </div>
+
+            <div class="photo-navigation">
+
+                <button
+                    onclick="previousPhoto()"
+                    ${currentPhotoIndex === 0 ? "disabled" : ""}
+                >
+                    Previous
+                </button>
+
+                <button
+                    onclick="nextPhoto()"
+                    ${currentPhotoIndex === photographs.length - 1 ? "disabled" : ""}
+                >
+                    Next
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+            window.scrollTo(0, 0);
+        }
+
+
+        /* ==================================================
+           PREVIOUS / NEXT PHOTOGRAPH
+        ================================================== */
+
+        function previousPhoto() {
+
+            if (currentPhotoIndex > 0) {
+                currentPhotoIndex--;
+                showPhoto();
+            }
+        }
+
+        function nextPhoto() {
+
+            if (
+                currentProject &&
+                currentPhotoIndex < currentProject.photographs.length - 1
+            ) {
+                currentPhotoIndex++;
+                showPhoto();
+            }
+        }
+
+
+        /* ==================================================
+           WRITING DIRECTORY
+        ================================================== */
+
+        function showWriting() {
+
+            currentPage = "writing";
+
+            setActiveNav("writing");
+
+            currentWritingIndex = 0;
+
+            showWritingArticle();
+        }
+
+
+        /* ==================================================
+           WRITING VIEWER
+        ================================================== */
+
+        function showWritingArticle() {
+
+            currentPage = "writing";
+
+            const writing = writings[currentWritingIndex];
+
+            if (!writing) {
+                main.innerHTML = "";
+                return;
+            }
+
+            main.innerHTML = `
+
+        <div class="writing-viewer">
+
+            <div class="writing-content">${writing.content}</div>
+
+            <div class="writing-navigation">
+
+                <button
+                    class="back-link"
+                    onclick="previousWriting()"
+                    ${currentWritingIndex === 0 ? "disabled" : ""}
+                >
+                    Previous
+                </button>
+
+                <button
+                    class="back-link"
+                    onclick="nextWriting()"
+                    ${currentWritingIndex === writings.length - 1 ? "disabled" : ""}
+                >
+                    Next
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+            window.scrollTo(0, 0);
+        }
+
+
+        function previousWriting() {
+
+            if (currentWritingIndex > 0) {
+                currentWritingIndex--;
+                showWritingArticle();
+            }
+        }
+
+
+        function nextWriting() {
+
+            if (currentWritingIndex < writings.length - 1) {
+                currentWritingIndex++;
+                showWritingArticle();
+            }
+        }
+
+
+        /* ==================================================
+           KEYBOARD NAVIGATION
+        ================================================== */
+
+        document.addEventListener("keydown", function (event) {
+
+            if (currentPage === "photo") {
+
+                if (event.key === "ArrowLeft") {
+                    previousPhoto();
+                }
+
+                if (event.key === "ArrowRight") {
+                    nextPhoto();
+                }
+            }
+
+            if (currentPage === "writing") {
+
+                if (event.key === "ArrowLeft") {
+                    previousWriting();
+                }
+
+                if (event.key === "ArrowRight") {
+                    nextWriting();
+                }
+            }
+
+        });
+
+
+        /* ==================================================
+           INITIAL PAGE
+        ================================================== */
+
+        showPhotography();
+
+    </script>
+
+</body>
+
+</html>
