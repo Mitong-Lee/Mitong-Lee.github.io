@@ -553,6 +553,13 @@ previous and next navigation.`
 
         const main = document.getElementById("main");
 
+        // Image loading cache
+        const preloadedPhotos = new Map();
+
+        // Prevent outdated loading requests from replacing newer photographs
+        let photoRequestId = 0;
+        let pendingPhotoKey = null;
+
 
         /* ==================================================
            NAVIGATION HELPERS
@@ -630,60 +637,294 @@ previous and next navigation.`
 
 
         /* ==================================================
+           PHOTO PRELOADING
+        ================================================== */
+
+        // Load a photograph in the background.
+        // Reuse the image if it has already been requested.
+
+        function preloadPhoto(src) {
+
+            if (!src) return null;
+
+            if (!preloadedPhotos.has(src)) {
+
+                const image = new Image();
+
+                image.decoding = "async";
+                image.src = src;
+
+                preloadedPhotos.set(src, image);
+            }
+
+            return preloadedPhotos.get(src);
+        }
+
+
+        // Wait until an image has loaded and is ready to display.
+
+        function waitForPhoto(image) {
+
+            if (!image) {
+                return Promise.reject(new Error("Invalid image"));
+            }
+
+            if (image.complete) {
+
+                if (image.naturalWidth === 0) {
+                    return Promise.reject(
+                        new Error("Image failed to load")
+                    );
+                }
+
+                return (
+                    image.decode
+                        ? image.decode().catch(() => { }).then(() => image)
+                        : Promise.resolve(image)
+                );
+            }
+
+            return new Promise((resolve, reject) => {
+
+                image.addEventListener("load", async function () {
+
+                    try {
+                        if (image.decode) {
+                            await image.decode();
+                        }
+                    } catch (error) {
+                        // The image has loaded; continue even if decode()
+                        // is unavailable or rejects.
+                    }
+
+                    resolve(image);
+
+                }, { once: true });
+
+
+                image.addEventListener("error", function () {
+
+                    reject(new Error("Image failed to load"));
+
+                }, { once: true });
+
+            });
+        }
+
+
+        // Keep only the current photograph and its neighbours in memory.
+
+        function trimPhotoCache(photographs, index) {
+
+            const keep = new Set([
+
+                photographs[index - 1]?.src,
+                photographs[index]?.src,
+                photographs[index + 1]?.src
+
+            ].filter(Boolean));
+
+
+            for (const src of preloadedPhotos.keys()) {
+
+                if (!keep.has(src)) {
+                    preloadedPhotos.delete(src);
+                }
+
+            }
+
+        }
+
+
+        /* ==================================================
            PHOTO VIEWER
         ================================================== */
 
-        function showPhoto() {
+        function showPhoto(targetIndex = currentPhotoIndex) {
+
+            const project = currentProject;
+
+            if (!project) return;
+
+            const photographs = project.photographs;
+
+            if (
+                targetIndex < 0 ||
+                targetIndex >= photographs.length
+            ) {
+                return;
+            }
+
+            const photo = photographs[targetIndex];
+
+            const requestKey = `${project.id}:${targetIndex}`;
+
+            // Avoid starting the same request multiple times.
+            if (pendingPhotoKey === requestKey) return;
+
+            pendingPhotoKey = requestKey;
+
+            // Identify this particular loading request.
+            const requestId = ++photoRequestId;
 
             currentPage = "photo";
 
             setActiveNav("photography");
 
-            const photographs = currentProject.photographs;
 
-            const photo = photographs[currentPhotoIndex];
+            // 1. Start loading the current photograph first.
 
-            const info = [
-                photo.info
-            ]
+            const targetImage = preloadPhoto(photo.src);
 
-            main.innerHTML = `
 
-        <div class="viewer">
+            // 2. Preload the previous photograph.
 
-            <div class="photo-stage">
-                <div class="photo-wrapper">
-                    <img src="${photo.src}" alt="">
+            const previous = photographs[targetIndex - 1];
 
-                    ${info ? `
-                        <div class="photo-info">${info}</div>
-                    ` : ""}
+            if (previous) {
+                preloadPhoto(previous.src);
+            }
+
+
+            // 3. Preload the next photograph.
+
+            const next = photographs[targetIndex + 1];
+
+            if (next) {
+                preloadPhoto(next.src);
+            }
+
+
+            // 4. Remove images outside the current three-photo window.
+
+            trimPhotoCache(photographs, targetIndex);
+
+
+            // 5. Wait for the target photograph.
+            // The existing page remains visible during this process.
+
+            waitForPhoto(targetImage)
+
+                .then(image => {
+
+                    // Ignore outdated requests.
+                    if (
+                        requestId !== photoRequestId ||
+                        currentProject !== project
+                    ) {
+                        return;
+                    }
+
+                    pendingPhotoKey = null;
+
+                    // Only update the index after the image is ready.
+                    currentPhotoIndex = targetIndex;
+
+
+                    // Render the new photograph.
+
+                    main.innerHTML = `
+
+                <div class="viewer">
+
+                    <div class="photo-stage">
+
+                        <div class="photo-wrapper"></div>
+
+                    </div>
+
+
+                    <div class="photo-navigation">
+
+                        <button
+                            onclick="previousPhoto()"
+                            ${targetIndex === 0 ? "disabled" : ""}
+                        >
+                            Previous
+                        </button>
+
+                        <button
+                            onclick="nextPhoto()"
+                            ${targetIndex === photographs.length - 1 ? "disabled" : ""}
+                        >
+                            Next
+                        </button>
+
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="photo-navigation">
+            `;
 
-                <button
-                    onclick="previousPhoto()"
-                    ${currentPhotoIndex === 0 ? "disabled" : ""}
-                >
-                    Previous
-                </button>
 
-                <button
-                    onclick="nextPhoto()"
-                    ${currentPhotoIndex === photographs.length - 1 ? "disabled" : ""}
-                >
-                    Next
-                </button>
+                    // Reuse the already-loaded Image object.
+                    // No need to request the image again.
 
-            </div>
+                    image.alt = `${project.title} — ${targetIndex + 1}`;
 
-        </div>
+                    const wrapper = main.querySelector(".photo-wrapper");
 
-    `;
+                    wrapper.appendChild(image);
 
-            window.scrollTo(0, 0);
+
+                    // Add photograph information.
+
+                    if (photo.info) {
+
+                        const info = document.createElement("div");
+
+                        info.className = "photo-info";
+                        info.textContent = photo.info;
+
+                        wrapper.appendChild(info);
+
+                    }
+
+
+                    window.scrollTo(0, 0);
+
+                })
+
+
+                .catch(error => {
+
+                    // Ignore errors from outdated requests.
+
+                    if (
+                        requestId !== photoRequestId ||
+                        currentProject !== project
+                    ) {
+                        return;
+                    }
+
+                    pendingPhotoKey = null;
+
+                    console.error("Failed to load photograph:", error);
+
+                    // Keep the previously displayed photograph.
+                    // Display an error message without clearing the page.
+
+                    const container = main.querySelector(".viewer") || main;
+
+                    let message = container.querySelector(".photo-load-error");
+
+                    if (!message) {
+
+                        message = document.createElement("div");
+
+                        message.className = "photo-load-error";
+                        message.style.marginTop = "16px";
+                        message.style.color = "#999";
+                        message.style.fontSize = "11px";
+
+                        container.appendChild(message);
+
+                    }
+
+                    message.textContent = "Unable to load this photograph. Please try again.";
+
+                });
+
         }
 
 
@@ -693,11 +934,15 @@ previous and next navigation.`
 
         function previousPhoto() {
 
-            if (currentPhotoIndex > 0) {
-                currentPhotoIndex--;
-                showPhoto();
+            if (
+                currentProject &&
+                currentPhotoIndex > 0
+            ) {
+                showPhoto(currentPhotoIndex - 1);
             }
+
         }
+
 
         function nextPhoto() {
 
@@ -705,9 +950,9 @@ previous and next navigation.`
                 currentProject &&
                 currentPhotoIndex < currentProject.photographs.length - 1
             ) {
-                currentPhotoIndex++;
-                showPhoto();
+                showPhoto(currentPhotoIndex + 1);
             }
+
         }
 
 
