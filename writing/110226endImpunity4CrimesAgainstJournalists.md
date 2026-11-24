@@ -1,0 +1,3 @@
+Today is the International Day to End Impunity for Crimes Against Journalists, a day dedicated to drawing attention to the problem of impunity for crimes against journalists, which remains a serious issue worldwide. According to data from the UNESCO Observatory for Murdered Journalists, more than 1,200 journalists were killed worldwide between 2006 and 2020, and nearly nine out of ten of these cases remain unresolved by the justice system. Because journalists play a vital role in reporting the facts to all citizens, the destructive impact of impunity for attacks on journalists is particularly severe, as it limits public awareness and constructive debate.
+
+*11/2/2026*
