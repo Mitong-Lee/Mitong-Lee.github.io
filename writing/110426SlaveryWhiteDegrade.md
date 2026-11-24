@@ -1,0 +1,3 @@
+"......The fear amongst white people of a slave uprising fuelled an intoxicating ‘biological theory of racial superiority’ and, in that era of progress, transformed the South into a reactionary backwater—one of the last bastions of slavery in the Western world. The defenders of slavery were forced to sink to the same level as those they oppressed. As the eminent Black leader and former slave, Booker T. Harvey Washington, later pointed out, if white people were to keep Black people trapped in the ditch, they themselves would have to crouch in the ditch alongside them."
+
+*11/4/2026*

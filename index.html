@@ -140,51 +140,54 @@
             color: #444;
         }
 
-        /* PHOTO VIEWER */
-
-        .viewer {
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Fixed viewing area */
-
-        /* PHOTO STAGE */
-
         .photo-stage {
-            width: 100%;
-            height: auto;
+            width: fit-content;
+            max-width: 100%;
             margin: 0 auto;
-
             display: flex;
             justify-content: center;
-            align-items: center;
         }
-
-        /* PHOTOGRAPH */
 
         .photo-stage img {
             display: block;
-
-            width: auto;
-            height: auto;
-
             max-width: 100%;
             max-height: 70vh;
-
+            width: auto;
+            height: auto;
             object-fit: contain;
         }
 
-        /* Photograph information */
-
         .photo-info {
-            width: 100%;
+            width: fit-content;
+            max-width: 100%;
             margin: 12px auto 0;
-
             color: #777;
             font-size: 10px;
             line-height: 1.7;
             text-align: right;
+        }
+
+        .photo-wrapper {
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .photo-wrapper img {
+            display: block;
+            max-width: 100%;
+            max-height: 70vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .photo-info {
+            width: 100%;
+            margin-top: 12px;
+            text-align: right;
+            color: #777;
+            font-size: 10px;
+            line-height: 1.7;
         }
 
         .photo-navigation {
@@ -223,21 +226,141 @@
    WRITING
 ========================= */
 
-        .writing-list {
-            max-width: 540px;
-            margin: 0 auto;
-        }
-
         .writing-viewer {
             max-width: 540px;
             margin: 0 auto;
         }
 
         .writing-content {
+            color: #333;
             font-size: 13px;
             line-height: 1.9;
+            overflow-wrap: anywhere;
+        }
+
+        .writing-content > :first-child {
+            margin-top: 0;
+        }
+
+        .writing-content h1,
+        .writing-content h2,
+        .writing-content h3,
+        .writing-content h4 {
+            color: #222;
+            font-weight: 600;
+            line-height: 1.45;
+            margin: 1.8em 0 0.7em;
+        }
+
+        .writing-content h1 { font-size: 21px; }
+        .writing-content h2 { font-size: 17px; }
+        .writing-content h3 { font-size: 14px; }
+        .writing-content h4 { font-size: 13px; }
+
+        .writing-content p {
+            margin: 0 0 1.15em;
+        }
+
+        .writing-content strong {
+            font-weight: 700;
+            color: #222;
+        }
+
+        .writing-content em {
+            font-style: italic;
+        }
+
+        .writing-content ul,
+        .writing-content ol {
+            padding-left: 1.6em;
+            margin: 0 0 1.2em;
+        }
+
+        .writing-content li {
+            padding-left: 0.2em;
+            margin: 0.25em 0;
+        }
+
+        .writing-content blockquote {
+            margin: 1.5em 0;
+            padding: 0 0 0 16px;
+            border-left: 1px solid #ccc;
+            color: #777;
+        }
+
+        .writing-content blockquote > :last-child {
+            margin-bottom: 0;
+        }
+
+        .writing-content a {
             color: #333;
-            white-space: pre-line;
+            text-decoration: underline;
+            text-decoration-color: #bbb;
+            text-underline-offset: 2px;
+        }
+
+        .writing-content a:hover {
+            color: #000;
+            text-decoration-color: #333;
+        }
+
+        .writing-content hr {
+            border: 0;
+            border-top: 1px solid #e3e3e3;
+            margin: 2em 0;
+        }
+
+        .writing-content code {
+            font-family: Menlo, Monaco, Consolas, monospace;
+            font-size: 0.88em;
+            background: #f5f5f5;
+            padding: 2px 4px;
+        }
+
+        .writing-content pre {
+            overflow-x: auto;
+            padding: 13px 15px;
+            background: #f7f7f7;
+            line-height: 1.65;
+        }
+
+        .writing-content pre code {
+            padding: 0;
+            background: transparent;
+        }
+
+        .writing-content img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 1.5em auto;
+        }
+
+        .writing-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 12px;
+        }
+
+        .writing-content th,
+        .writing-content td {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 7px 9px;
+            text-align: left;
+        }
+
+        .writing-status {
+            color: #888;
+            font-size: 11px;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .writing-error {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.7;
         }
 
         .writing-navigation {
@@ -319,11 +442,11 @@
 
             <nav>
                 <a href="#" id="nav-photography" onclick="showPhotography(); return false;">
-                    photography
+                    Photography
                 </a>
 
                 <a href="#" id="nav-writing" onclick="showWriting(); return false;">
-                    writing
+                    Writing
                 </a>
             </nav>
         </header>
@@ -333,6 +456,10 @@
 
     </div>
 
+
+    <!-- Markdown parser and HTML sanitizer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@18.2.1/lib/marked.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.5.0/dist/purify.min.js"></script>
 
     <script>
 
@@ -483,15 +610,6 @@
                     {
                         src: "./image/winter/26.webp", info: "Shanghai, Nov. 2026"
                     },
-                    {
-                        src: "./image/winter/27.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/28.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/29.webp", info: "Shanghai, Nov. 2026"
-                    },
                 ]
             },
 
@@ -516,26 +634,52 @@
 
         /* ==================================================
            WRITING DATABASE
+
+           Each article is a separate Markdown (.md) file.
+           Put the files in the /writing folder and list them here.
         ================================================== */
 
         const writings = [
-
             {
-                content: `This is a sample writing.
-
-Replace this text with your own writing.
-
-You can use multiple paragraphs by separating
-them with line breaks.`
+                title: "The Rise of Fascism",
+                file: "./writing/112425theRiseOfFascism.md"
             },
-
             {
-                content: `Another piece of writing.
-
-The writing section uses the same simple
-previous and next navigation.`
-            }
-
+                title: "Fight For Authenticity",
+                file: "./writing/060326fightForAuthenticity.md"
+            },
+            {
+                title: "About Slavery",
+                file: "./writing/110426SlaveryWhiteDegrade.md"
+            },
+            {
+                title: "Reichfürher",
+                file: "./writing/110526jokesAboutHitler.md"
+            },
+            {
+                title: "About Trump's Midterm",
+                file: "./writing/110526TurmpMidterm.md"
+            },
+            {
+                title: "Hongkong and Greece",
+                file: "./writing/110726HK&Greece.md"
+            },
+            {
+                title: "Midterm exam R over",
+                file: "./writing/111126midtermsROver.md"
+            },
+            {
+                title: "Russo Nazi Polka",
+                file: "./writing/111126RussoNaziPolka.md"
+            },
+            {
+                title: "Underworld",
+                file: "./writing/111726criminalUnderworld.md"
+            },
+            {
+                title: "MamdaniDisbandingSRG",
+                file: "./writing/111726Mamdani&SRG.md"
+            },
         ];
 
 
@@ -549,13 +693,6 @@ previous and next navigation.`
         let currentWritingIndex = 0;
 
         const main = document.getElementById("main");
-
-        // Image loading cache
-        const preloadedPhotos = new Map();
-
-        // Prevent outdated loading requests from replacing newer photographs
-        let photoRequestId = 0;
-        let pendingPhotoKey = null;
 
 
         /* ==================================================
@@ -634,371 +771,47 @@ previous and next navigation.`
 
 
         /* ==================================================
-           PHOTO PRELOADING
-        ================================================== */
-
-        // Load a photograph in the background.
-        // Reuse the image if it has already been requested.
-
-        function preloadPhoto(src) {
-
-            if (!src) return null;
-
-            if (!preloadedPhotos.has(src)) {
-
-                const image = new Image();
-
-                image.decoding = "async";
-                image.src = src;
-
-                preloadedPhotos.set(src, image);
-            }
-
-            return preloadedPhotos.get(src);
-        }
-
-
-        // Wait until an image has loaded and is ready to display.
-
-        function waitForPhoto(image) {
-
-            if (!image) {
-                return Promise.reject(new Error("Invalid image"));
-            }
-
-            if (image.complete) {
-
-                if (image.naturalWidth === 0) {
-                    return Promise.reject(
-                        new Error("Image failed to load")
-                    );
-                }
-
-                return (
-                    image.decode
-                        ? image.decode().catch(() => { }).then(() => image)
-                        : Promise.resolve(image)
-                );
-            }
-
-            return new Promise((resolve, reject) => {
-
-                image.addEventListener("load", async function () {
-
-                    try {
-                        if (image.decode) {
-                            await image.decode();
-                        }
-                    } catch (error) {
-                        // The image has loaded; continue even if decode()
-                        // is unavailable or rejects.
-                    }
-
-                    resolve(image);
-
-                }, { once: true });
-
-
-                image.addEventListener("error", function () {
-
-                    reject(new Error("Image failed to load"));
-
-                }, { once: true });
-
-            });
-        }
-
-
-        // Keep only the current photograph and its neighbours in memory.
-
-        function trimPhotoCache(photographs, index) {
-
-            const keep = new Set([
-
-                photographs[index - 1]?.src,
-                photographs[index]?.src,
-                photographs[index + 1]?.src
-
-            ].filter(Boolean));
-
-
-            for (const src of preloadedPhotos.keys()) {
-
-                if (!keep.has(src)) {
-                    preloadedPhotos.delete(src);
-                }
-
-            }
-
-        }
-
-
-        /* ==================================================
            PHOTO VIEWER
         ================================================== */
 
-        function showPhoto(targetIndex = currentPhotoIndex) {
-
-            const project = currentProject;
-
-            if (!project) return;
-
-            const photographs = project.photographs;
-
-            if (
-                targetIndex < 0 ||
-                targetIndex >= photographs.length
-            ) {
-                return;
-            }
-
-            const photo = photographs[targetIndex];
-
-            const requestKey = `${project.id}:${targetIndex}`;
-
-            // Avoid starting the same request multiple times.
-            if (pendingPhotoKey === requestKey) return;
-
-            pendingPhotoKey = requestKey;
-
-            // Identify this particular loading request.
-            const requestId = ++photoRequestId;
+        function showPhoto() {
 
             currentPage = "photo";
 
             setActiveNav("photography");
 
+            const photographs = currentProject.photographs;
 
-            // 1. Start loading the current photograph first.
+            const photo = photographs[currentPhotoIndex];
 
-            const targetImage = preloadPhoto(photo.src);
-
-
-            // 2. Preload the previous photograph.
-
-            const previous = photographs[targetIndex - 1];
-
-            if (previous) {
-                preloadPhoto(previous.src);
-            }
-
-
-            // 3. Preload the next photograph.
-
-            const next = photographs[targetIndex + 1];
-
-            if (next) {
-                preloadPhoto(next.src);
-            }
-
-
-            // 4. Remove images outside the current three-photo window.
-
-            trimPhotoCache(photographs, targetIndex);
-
-
-            // 5. Wait for the target photograph.
-            // The existing page remains visible during this process.
-
-            waitForPhoto(targetImage)
-
-                .then(image => {
-
-                    // Ignore outdated requests.
-                    if (
-                        requestId !== photoRequestId ||
-                        currentProject !== project
-                    ) {
-                        return;
-                    }
-
-                    pendingPhotoKey = null;
-
-                    // Only update the index after the image is ready.
-                    currentPhotoIndex = targetIndex;
-
-
-                    // Render the new photograph.
-
-                    main.innerHTML = `
-
-                <div class="viewer">
-
-                    <div class="photo-stage"></div>
-
-
-                    <div class="photo-navigation">
-
-                        <button
-                            onclick="previousPhoto()"
-                            ${targetIndex === 0 ? "disabled" : ""}
-                        >
-                            Previous
-                        </button>
-
-                        <button
-                            onclick="nextPhoto()"
-                            ${targetIndex === photographs.length - 1 ? "disabled" : ""}
-                        >
-                            Next
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-                    // Reuse the already-loaded Image object.
-                    // No need to request the image again.
-
-                    image.alt = `${project.title} — ${targetIndex + 1}`;
-
-                    const stage = main.querySelector(".photo-stage");
-
-                    stage.appendChild(image);
-
-                    // Add photograph information.
-
-                    if (photo.info) {
-
-                        const info = document.createElement("div");
-
-                        info.className = "photo-info";
-                        info.textContent = photo.info;
-
-                        stage.insertAdjacentElement("afterend", info);
-
-                    }
-
-
-                    window.scrollTo(0, 0);
-
-                })
-
-
-                .catch(error => {
-
-                    // Ignore errors from outdated requests.
-
-                    if (
-                        requestId !== photoRequestId ||
-                        currentProject !== project
-                    ) {
-                        return;
-                    }
-
-                    pendingPhotoKey = null;
-
-                    console.error("Failed to load photograph:", error);
-
-                    // Keep the previously displayed photograph.
-                    // Display an error message without clearing the page.
-
-                    const container = main.querySelector(".viewer") || main;
-
-                    let message = container.querySelector(".photo-load-error");
-
-                    if (!message) {
-
-                        message = document.createElement("div");
-
-                        message.className = "photo-load-error";
-                        message.style.marginTop = "16px";
-                        message.style.color = "#999";
-                        message.style.fontSize = "11px";
-
-                        container.appendChild(message);
-
-                    }
-
-                    message.textContent = "Unable to load this photograph. Please try again.";
-
-                });
-
-        }
-
-
-        /* ==================================================
-           PREVIOUS / NEXT PHOTOGRAPH
-        ================================================== */
-
-        function previousPhoto() {
-
-            if (
-                currentProject &&
-                currentPhotoIndex > 0
-            ) {
-                showPhoto(currentPhotoIndex - 1);
-            }
-
-        }
-
-
-        function nextPhoto() {
-
-            if (
-                currentProject &&
-                currentPhotoIndex < currentProject.photographs.length - 1
-            ) {
-                showPhoto(currentPhotoIndex + 1);
-            }
-
-        }
-
-
-        /* ==================================================
-           WRITING DIRECTORY
-        ================================================== */
-
-        function showWriting() {
-
-            currentPage = "writing";
-
-            setActiveNav("writing");
-
-            currentWritingIndex = 0;
-
-            showWritingArticle();
-        }
-
-
-        /* ==================================================
-           WRITING VIEWER
-        ================================================== */
-
-        function showWritingArticle() {
-
-            currentPage = "writing";
-
-            const writing = writings[currentWritingIndex];
-
-            if (!writing) {
-                main.innerHTML = "";
-                return;
-            }
+            const info = [photo.info].filter(Boolean).join(" · ");
 
             main.innerHTML = `
 
-        <div class="writing-viewer">
+        <div class="viewer">
 
-            <div class="writing-content">${writing.content}</div>
+            <div class="photo-stage">
+                <div class="photo-wrapper">
+                    <img src="${photo.src}" alt="">
 
-            <div class="writing-navigation">
+                    ${info ? `
+                        <div class="photo-info">${info}</div>
+                    ` : ""}
+                </div>
+            </div>
+
+            <div class="photo-navigation">
 
                 <button
-                    class="back-link"
-                    onclick="previousWriting()"
-                    ${currentWritingIndex === 0 ? "disabled" : ""}
+                    onclick="previousPhoto()"
+                    ${currentPhotoIndex === 0 ? "disabled" : ""}
                 >
                     Previous
                 </button>
 
                 <button
-                    class="back-link"
-                    onclick="nextWriting()"
-                    ${currentWritingIndex === writings.length - 1 ? "disabled" : ""}
+                    onclick="nextPhoto()"
+                    ${currentPhotoIndex === photographs.length - 1 ? "disabled" : ""}
                 >
                     Next
                 </button>
@@ -1013,17 +826,133 @@ previous and next navigation.`
         }
 
 
-        function previousWriting() {
+        /* ==================================================
+           PREVIOUS / NEXT PHOTOGRAPH
+        ================================================== */
 
+        function previousPhoto() {
+
+            if (currentPhotoIndex > 0) {
+                currentPhotoIndex--;
+                showPhoto();
+            }
+        }
+
+        function nextPhoto() {
+
+            if (
+                currentProject &&
+                currentPhotoIndex < currentProject.photographs.length - 1
+            ) {
+                currentPhotoIndex++;
+                showPhoto();
+            }
+        }
+
+
+        /* ==================================================
+           WRITING VIEWER
+
+           Fetch the selected Markdown file, convert it to HTML,
+           then sanitize the result before inserting it into the page.
+        ================================================== */
+
+        let writingRequestId = 0;
+
+        function showWriting() {
+            currentPage = "writing";
+            setActiveNav("writing");
+            currentWritingIndex = 0;
+            showWritingArticle();
+        }
+
+        async function showWritingArticle() {
+            currentPage = "writing";
+            setActiveNav("writing");
+
+            const writing = writings[currentWritingIndex];
+            if (!writing) {
+                main.innerHTML = "";
+                return;
+            }
+
+            const requestId = ++writingRequestId;
+
+            main.innerHTML = `
+                <div class="writing-viewer">
+                    <div class="writing-content">
+                        <p class="writing-status">Loading...</p>
+                    </div>
+                    <div class="writing-navigation">
+                        <button class="back-link" onclick="previousWriting()"
+                            ${currentWritingIndex === 0 ? "disabled" : ""}>Previous</button>
+                        <button class="back-link" onclick="nextWriting()"
+                            ${currentWritingIndex === writings.length - 1 ? "disabled" : ""}>Next</button>
+                    </div>
+                </div>
+            `;
+
+            window.scrollTo(0, 0);
+
+            try {
+                const response = await fetch(writing.file);
+                if (!response.ok) {
+                    throw new Error(`Could not load ${writing.file} (${response.status})`);
+                }
+
+                const markdown = await response.text();
+
+                if (requestId !== writingRequestId || currentPage !== "writing") return;
+
+                if (!window.marked || !window.DOMPurify) {
+                    throw new Error("The Markdown libraries could not be loaded. Check your internet connection or CDN access.");
+                }
+
+                const renderedHTML = window.marked.parse(markdown, {
+                    gfm: true,
+                    breaks: false
+                });
+
+                const safeHTML = window.DOMPurify.sanitize(renderedHTML, { USE_PROFILES: { html: true } });
+
+                main.innerHTML = `
+                    <div class="writing-viewer">
+                        <article class="writing-content">
+                            ${safeHTML}
+                        </article>
+
+                        <div class="writing-navigation">
+                            <button class="back-link" onclick="previousWriting()"
+                                ${currentWritingIndex === 0 ? "disabled" : ""}>Previous</button>
+                            <button class="back-link" onclick="nextWriting()"
+                                ${currentWritingIndex === writings.length - 1 ? "disabled" : ""}>Next</button>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                if (requestId !== writingRequestId) return;
+                console.error(error);
+
+                const content = main.querySelector(".writing-content");
+                if (content) {
+                    content.innerHTML = `
+                        <p class="writing-error">
+                            Unable to load this article. Please check that the Markdown file exists at
+                            <code>${writing.file}</code> and that the site is being served over HTTP/HTTPS.
+                        </p>
+                    `;
+                }
+            }
+        }
+
+        function previousWriting() {
             if (currentWritingIndex > 0) {
                 currentWritingIndex--;
                 showWritingArticle();
             }
         }
 
-
         function nextWriting() {
-
             if (currentWritingIndex < writings.length - 1) {
                 currentWritingIndex++;
                 showWritingArticle();
@@ -1048,13 +977,15 @@ previous and next navigation.`
                 }
             }
 
-            if (currentPage === "writing") {
+            if (currentPage === "writing" && !event.metaKey && !event.ctrlKey && !event.altKey) {
 
                 if (event.key === "ArrowLeft") {
+                    event.preventDefault();
                     previousWriting();
                 }
 
                 if (event.key === "ArrowRight") {
+                    event.preventDefault();
                     nextWriting();
                 }
             }
