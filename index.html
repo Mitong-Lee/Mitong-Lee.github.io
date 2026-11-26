@@ -1,57 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photography and writing by Mitong Li.">
     <title>Mitong Li</title>
 
     <style>
-        /* =========================
-   BASIC
-========================= */
-
-        * {
-            box-sizing: border-box;
+        :root {
+            color-scheme: light;
+            --page-width: 716px;
+            --text: #222;
+            --muted: #777;
+            --line: #dedede;
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
             background: #fff;
-            color: #222;
+            color: var(--text);
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
             font-weight: 400;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        button {
-            font: inherit;
-        }
-
-        /* =========================
-   MAIN LAYOUT
-========================= */
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; }
 
         .site {
-            width: min(716px, calc(100% - 40px));
+            width: min(var(--page-width), calc(100% - 40px));
             margin: 0 auto;
         }
 
         header {
-            height: 58px;
-            border-bottom: 1px solid #dedede;
+            min-height: 58px;
+            border-bottom: 1px solid var(--line);
             display: flex;
             align-items: center;
             gap: 28px;
         }
 
         .site-name {
+            flex: 0 0 auto;
             font-size: 14px;
             font-weight: 600;
             white-space: nowrap;
@@ -65,34 +57,42 @@
 
         nav a {
             color: #555;
-            transition: color 0.15s ease;
+            transition: color .15s ease;
         }
 
         nav a:hover,
-        nav a.active {
-            color: #000;
+        nav a.active { color: #000; }
+
+        nav a:focus-visible,
+        button:focus-visible,
+        .project:focus-visible {
+            outline: 1px solid #555;
+            outline-offset: 4px;
         }
 
         main {
+            min-height: 220px;
             padding-top: 62px;
             padding-bottom: 100px;
         }
 
-        /* =========================
-   PHOTOGRAPHY DIRECTORY
-========================= */
-
+        /* Photography directory */
         .directory {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             column-gap: 54px;
             row-gap: 28px;
             align-items: start;
         }
 
         .project {
-            cursor: pointer;
             min-width: 0;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            text-align: left;
+            cursor: pointer;
         }
 
         .project-image {
@@ -110,12 +110,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: opacity 0.2s ease;
+            transition: opacity .2s ease;
         }
 
-        .project:hover .project-image img {
-            opacity: 0.82;
-        }
+        .project:hover .project-image img { opacity: .82; }
 
         .project-title {
             margin-top: 9px;
@@ -124,52 +122,20 @@
             line-height: 1.4;
         }
 
-        /* =========================
-   PHOTO VIEWER
-========================= */
-
-        .viewer {
-            width: 100%;
-            text-align: center;
-        }
-
-        .viewer-heading {
-            margin: 0 0 30px;
-            font-size: 12px;
-            font-weight: 400;
-            color: #444;
-        }
-
-        .photo-stage {
-            width: fit-content;
-            max-width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-        }
-
-        .photo-stage img {
-            display: block;
-            max-width: 100%;
-            max-height: 70vh;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .photo-info {
-            width: fit-content;
-            max-width: 100%;
-            margin: 12px auto 0;
+        .empty-state,
+        .load-error {
             color: #777;
-            font-size: 10px;
-            line-height: 1.7;
-            text-align: right;
+            font-size: 12px;
+            line-height: 1.8;
         }
+
+        /* Photograph viewer */
+        .viewer { width: 100%; text-align: center; }
 
         .photo-wrapper {
             width: fit-content;
             max-width: 100%;
+            margin: 0 auto;
         }
 
         .photo-wrapper img {
@@ -184,13 +150,14 @@
         .photo-info {
             width: 100%;
             margin-top: 12px;
-            text-align: right;
-            color: #777;
+            color: var(--muted);
             font-size: 10px;
             line-height: 1.7;
+            text-align: right;
         }
 
-        .photo-navigation {
+        .photo-navigation,
+        .writing-navigation {
             margin-top: 32px;
             display: flex;
             justify-content: center;
@@ -199,6 +166,7 @@
         }
 
         .photo-navigation button,
+        .writing-navigation button,
         .back-link {
             border: 0;
             padding: 0;
@@ -209,23 +177,18 @@
         }
 
         .photo-navigation button:hover,
-        .back-link:hover {
-            color: #000;
-        }
+        .writing-navigation button:hover,
+        .back-link:hover { color: #000; }
 
-        .photo-navigation button:disabled {
+        .photo-navigation button:disabled,
+        .writing-navigation button:disabled {
             color: #ccc;
             cursor: default;
         }
 
-        .viewer-back {
-            margin-top: 22px;
-        }
+        .viewer-back { margin-top: 22px; }
 
-        /* =========================
-   WRITING
-========================= */
-
+        /* Writing */
         .writing-viewer {
             max-width: 540px;
             margin: 0 auto;
@@ -238,9 +201,7 @@
             overflow-wrap: anywhere;
         }
 
-        .writing-content > :first-child {
-            margin-top: 0;
-        }
+        .writing-content > :first-child { margin-top: 0; }
 
         .writing-content h1,
         .writing-content h2,
@@ -249,26 +210,16 @@
             color: #222;
             font-weight: 600;
             line-height: 1.45;
-            margin: 1.8em 0 0.7em;
+            margin: 1.8em 0 .7em;
         }
 
         .writing-content h1 { font-size: 21px; }
         .writing-content h2 { font-size: 17px; }
         .writing-content h3 { font-size: 14px; }
         .writing-content h4 { font-size: 13px; }
-
-        .writing-content p {
-            margin: 0 0 1.15em;
-        }
-
-        .writing-content strong {
-            font-weight: 700;
-            color: #222;
-        }
-
-        .writing-content em {
-            font-style: italic;
-        }
+        .writing-content p { margin: 0 0 1.15em; }
+        .writing-content strong { font-weight: 700; color: #222; }
+        .writing-content em { font-style: italic; }
 
         .writing-content ul,
         .writing-content ol {
@@ -276,10 +227,7 @@
             margin: 0 0 1.2em;
         }
 
-        .writing-content li {
-            padding-left: 0.2em;
-            margin: 0.25em 0;
-        }
+        .writing-content li { padding-left: .2em; margin: .25em 0; }
 
         .writing-content blockquote {
             margin: 1.5em 0;
@@ -288,9 +236,7 @@
             color: #777;
         }
 
-        .writing-content blockquote > :last-child {
-            margin-bottom: 0;
-        }
+        .writing-content blockquote > :last-child { margin-bottom: 0; }
 
         .writing-content a {
             color: #333;
@@ -299,20 +245,12 @@
             text-underline-offset: 2px;
         }
 
-        .writing-content a:hover {
-            color: #000;
-            text-decoration-color: #333;
-        }
-
-        .writing-content hr {
-            border: 0;
-            border-top: 1px solid #e3e3e3;
-            margin: 2em 0;
-        }
+        .writing-content a:hover { color: #000; text-decoration-color: #333; }
+        .writing-content hr { border: 0; border-top: 1px solid #e3e3e3; margin: 2em 0; }
 
         .writing-content code {
             font-family: Menlo, Monaco, Consolas, monospace;
-            font-size: 0.88em;
+            font-size: .88em;
             background: #f5f5f5;
             padding: 2px 4px;
         }
@@ -324,10 +262,7 @@
             line-height: 1.65;
         }
 
-        .writing-content pre code {
-            padding: 0;
-            background: transparent;
-        }
+        .writing-content pre code { padding: 0; background: transparent; }
 
         .writing-content img {
             display: block;
@@ -357,545 +292,161 @@
             padding: 30px 0;
         }
 
-        .writing-error {
-            color: #777;
-            font-size: 12px;
-            line-height: 1.7;
-        }
-
-        .writing-navigation {
-            margin-top: 42px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        /* =========================
-   RESPONSIVE
-========================= */
+        .writing-error { color: #777; font-size: 12px; line-height: 1.7; }
+        .writing-navigation { margin-top: 42px; }
 
         @media (max-width: 600px) {
-            .site {
-                width: calc(100% - 36px);
-            }
-
-            header {
-                gap: 18px;
-            }
-
-            nav {
-                gap: 14px;
-            }
-
+            .site { width: calc(100% - 36px); }
+            header { gap: 18px; }
+            nav { gap: 14px; }
             .directory {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 column-gap: 24px;
                 row-gap: 28px;
             }
-
-            .project-image {
-                height: 105px;
-            }
-
-            main {
-                padding-top: 38px;
-            }
-
-            .photo-stage {
-                min-height: 220px;
-            }
-
-            .photo-stage img {
-                max-height: 65vh;
-            }
+            .project-image { height: 105px; }
+            main { padding-top: 38px; }
+            .photo-wrapper img { max-height: 65vh; }
         }
 
         @media (max-width: 360px) {
-            header {
-                gap: 12px;
-            }
-
-            nav {
-                gap: 10px;
-            }
-
-            .site-name {
-                font-size: 13px;
-            }
-
-            nav a {
-                font-size: 11px;
-            }
+            header { gap: 12px; }
+            nav { gap: 10px; }
+            .site-name { font-size: 13px; }
+            nav a { font-size: 11px; }
         }
     </style>
 </head>
 
 <body>
-
     <div class="site">
-
-        <!-- HEADER -->
         <header>
-            <a class="site-name" href="#" onclick="showPhotography(); return false;">
-                Mitong Li
-            </a>
-
-            <nav>
-                <a href="#" id="nav-photography" onclick="showPhotography(); return false;">
-                    Photography
-                </a>
-
-                <a href="#" id="nav-writing" onclick="showWriting(); return false;">
-                    Writing
-                </a>
+            <a class="site-name" href="#photography" id="home-link">Mitong Li</a>
+            <nav aria-label="Main navigation">
+                <a href="#photography" id="nav-photography">Photography</a>
+                <a href="#writing" id="nav-writing">Writing</a>
             </nav>
         </header>
 
-        <!-- MAIN CONTENT -->
-        <main id="main"></main>
-
+        <main id="main" aria-live="polite">
+            <p class="writing-status">Loading content...</p>
+        </main>
     </div>
 
-
-    <!-- Markdown parser and HTML sanitizer -->
+    <!-- Markdown renderer and sanitizer -->
     <script src="https://cdn.jsdelivr.net/npm/marked@18.2.1/lib/marked.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.5.0/dist/purify.min.js"></script>
 
     <script>
+        "use strict";
 
-        /* ==================================================
-           CONTENT DATABASE
-        
-           Add or edit your projects and photographs here.
-           Use paths relative to index.html.
-        ================================================== */
+        /*
+         * Content is generated by build_index.py.
+         * Add photos to image/<project>/ and Markdown files to writing/.
+         * Do not edit the project/article lists here.
+         */
 
-        const projects = [
+        const CONTENT_INDEX = "./content.json";
+        const main = document.getElementById("main");
 
-            {
-                id: "28mm",
-                title: "28mm",
-                cover: "./image/28mm/cover.webp",
-
-                photographs: [
-                    {
-                        src: "./image/28mm/01.webp", info: "Shanghai, Oct. 2026"
-                    },
-                    {
-                        src: "./image/28mm/02.webp", info: "Shanghai, Oct. 2026"
-                    },
-                    {
-                        src: "./image/28mm/03.webp", info: "Shanghai, Oct. 2026"
-                    },
-                    {
-                        src: "./image/28mm/04.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/28mm/05.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/28mm/06.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/28mm/07.webp", info: "Hongkong, July 2026"
-                    },
-                    {
-                        src: "./image/28mm/08.webp", info: "Hongkong, July 2026"
-                    },
-                    {
-                        src: "./image/28mm/09.webp", info: "Hongkong, July 2026"
-                    },
-                    {
-                        src: "./image/28mm/10.webp", info: "Hongkong, July 2026"
-                    },
-                    {
-                        src: "./image/28mm/11.webp", info: "Hongkong, July 2026"
-                    },
-                    {
-                        src: "./image/28mm/12.webp", info: "Hongkong, July 2026"
-                    },
-                    {
-                        src: "./image/28mm/13.webp", info: "Hongkong, July 2026"
-                    },
-                ]
-            },
-
-            {
-                id: "standard",
-                title: "standard",
-                cover: "./image/standard/cover.webp",
-
-                photographs: [
-                    {
-                        src: "./image/standard/01.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/standard/02.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/standard/03.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/standard/04.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/standard/05.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/standard/06.webp", info: "Shanghai, Nov. 2026"
-                    },
-                ]
-            },
-
-            {
-                id: "winter",
-                title: "Winter as it is",
-                cover: "./image/winter/cover.webp",
-
-                photographs: [
-                    {
-                        src: "./image/winter/01.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/02.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/03.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/04.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/05.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/06.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/07.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/08.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/09.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/10.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/11.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/12.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/13.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/14.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/15.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/16.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/17.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/18.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/19.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/20.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/21.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/22.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/23.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/24.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/25.webp", info: "Shanghai, Nov. 2026"
-                    },
-                    {
-                        src: "./image/winter/26.webp", info: "Shanghai, Nov. 2026"
-                    },
-                ]
-            },
-
-            /*
-            ADD MORE PROJECTS HERE:
-        
-            {
-                id: "winter",
-                title: "Winter as it is",
-                cover: "./image/winter/cover.webp",
-        
-                photographs: [
-                    {
-                        src: "./image/winter/01.webp", info: ""
-                    }
-                ]
-            },
-            */
-
-        ];
-
-
-        /* ==================================================
-           WRITING DATABASE
-
-           Each article is a separate Markdown (.md) file.
-           Put the files in the /writing folder and list them here.
-        ================================================== */
-
-        const writings = [
-            {
-                title: "The Rise of Fascism",
-                file: "./writing/112425theRiseOfFascism.md"
-            },
-            {
-                title: "Fight For Authenticity",
-                file: "./writing/060326fightForAuthenticity.md"
-            },
-            {
-                title: "joinTheUnion",
-                file: "./writing/102826joinTheUnion.md"
-            },
-            {
-                title: "the International Day to End Impunity for Crimes Against Journalists",
-                file: "./writing/110226endImpunity4CrimesAgainstJournalists.md"
-            },
-            {
-                title: "About Slavery",
-                file: "./writing/110426SlaveryWhiteDegrade.md"
-            },
-            {
-                title: "Reichfürher",
-                file: "./writing/110526jokesAboutHitler.md"
-            },
-            {
-                title: "About Trump's Midterm",
-                file: "./writing/110526TurmpMidterm.md"
-            },
-            {
-                title: "Hongkong and Greece",
-                file: "./writing/110726HK&Greece.md"
-            },
-            {
-                title: "Midterm exam R over",
-                file: "./writing/111126midtermsROver.md"
-            },
-            {
-                title: "Russo Nazi Polka",
-                file: "./writing/111126RussoNaziPolka.md"
-            },
-            {
-                title: "Underworld",
-                file: "./writing/111726criminalUnderworld.md"
-            },
-            {
-                title: "MamdaniDisbandingSRG",
-                file: "./writing/111726Mamdani&SRG.md"
-            },
-            {
-                title: "9MealAwayFromAnarchy",
-                file: "./writing/112426-9MealAwayFromAnarchy.md"
-            },
-        ];
-
-
-        /* ==================================================
-           STATE
-        ================================================== */
-
+        let content = { projects: [], writings: [] };
         let currentPage = "directory";
         let currentProject = null;
         let currentPhotoIndex = 0;
         let currentWritingIndex = 0;
+        let writingRequestId = 0;
 
-        const main = document.getElementById("main");
-
-
-        /* ==================================================
-           NAVIGATION HELPERS
-        ================================================== */
-
-        function setActiveNav(page) {
-
-            document.getElementById("nav-photography")
-                .classList.toggle("active", page === "photography");
-
-            document.getElementById("nav-writing")
-                .classList.toggle("active", page === "writing");
+        function escapeHTML(value) {
+            return String(value ?? "").replace(/[&<>"']/g, character => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[character]);
         }
 
-
-        /* ==================================================
-           PHOTOGRAPHY DIRECTORY
-        ================================================== */
+        function setActiveNav(page) {
+            document.getElementById("nav-photography").classList.toggle("active", page === "photography");
+            document.getElementById("nav-writing").classList.toggle("active", page === "writing");
+        }
 
         function showPhotography() {
-
             currentPage = "directory";
             currentProject = null;
-
+            writingRequestId++;
             setActiveNav("photography");
 
-            let html = `<div class="directory">`;
+            if (!content.projects.length) {
+                main.innerHTML = '<p class="empty-state">No photography projects found. Add folders and photographs under <code>image/</code>, then run <code>python3 build_index.py</code>.</p>';
+                window.scrollTo(0, 0);
+                return;
+            }
 
-            projects.forEach(project => {
+            const cards = content.projects.map(project => `
+                <button class="project" type="button" data-project-id="${escapeHTML(project.id)}" aria-label="Open ${escapeHTML(project.title)}">
+                    <span class="project-image">
+                        <img src="${escapeHTML(project.cover)}" alt="${escapeHTML(project.title)}" loading="lazy">
+                    </span>
+                    <span class="project-title">${escapeHTML(project.title)}</span>
+                </button>
+            `).join("");
 
-                html += `
-            <div class="project"
-                 onclick="openProject('${project.id}')">
-
-                <div class="project-image">
-                    <img
-                        src="${project.cover}"
-                        alt="${project.title}"
-                        loading="lazy"
-                    >
-                </div>
-
-                <div class="project-title">
-                    ${project.title}
-                </div>
-
-            </div>
-        `;
-            });
-
-            html += `</div>`;
-
-            main.innerHTML = html;
-
+            main.innerHTML = `<div class="directory">${cards}</div>`;
             window.scrollTo(0, 0);
         }
 
-
-        /* ==================================================
-           OPEN A PROJECT
-        ================================================== */
-
         function openProject(projectId) {
+            const project = content.projects.find(item => item.id === projectId);
+            if (!project || !project.photographs.length) return;
 
-            currentProject = projects.find(
-                project => project.id === projectId
-            );
-
-            if (!currentProject) return;
-
+            currentProject = project;
             currentPhotoIndex = 0;
-
             showPhoto();
         }
 
-
-        /* ==================================================
-           PHOTO VIEWER
-        ================================================== */
-
         function showPhoto() {
-
+            if (!currentProject) return;
             currentPage = "photo";
-
             setActiveNav("photography");
 
             const photographs = currentProject.photographs;
-
             const photo = photographs[currentPhotoIndex];
-
-            const info = [photo.info].filter(Boolean).join(" · ");
+            const info = photo.info || currentProject.info || "";
 
             main.innerHTML = `
-
-        <div class="viewer">
-
-            <div class="photo-stage">
-                <div class="photo-wrapper">
-                    <img src="${photo.src}" alt="">
-
-                    ${info ? `
-                        <div class="photo-info">${info}</div>
-                    ` : ""}
-                </div>
-            </div>
-
-            <div class="photo-navigation">
-
-                <button
-                    onclick="previousPhoto()"
-                    ${currentPhotoIndex === 0 ? "disabled" : ""}
-                >
-                    Previous
-                </button>
-
-                <button
-                    onclick="nextPhoto()"
-                    ${currentPhotoIndex === photographs.length - 1 ? "disabled" : ""}
-                >
-                    Next
-                </button>
-
-            </div>
-
-        </div>
-
-    `;
-
+                <section class="viewer" aria-label="Photograph viewer">
+                    <div class="photo-wrapper">
+                        <img src="${escapeHTML(photo.src)}" alt="${escapeHTML(photo.alt || currentProject.title)}">
+                        ${info ? `<div class="photo-info">${escapeHTML(info)}</div>` : ""}
+                    </div>
+                    <div class="photo-navigation">
+                        <button type="button" data-action="previous-photo" ${currentPhotoIndex === 0 ? "disabled" : ""}>Previous</button>
+                        <button type="button" data-action="next-photo" ${currentPhotoIndex === photographs.length - 1 ? "disabled" : ""}>Next</button>
+                    </div>
+                </section>
+            `;
             window.scrollTo(0, 0);
         }
 
-
-        /* ==================================================
-           PREVIOUS / NEXT PHOTOGRAPH
-        ================================================== */
-
         function previousPhoto() {
-
-            if (currentPhotoIndex > 0) {
+            if (currentProject && currentPhotoIndex > 0) {
                 currentPhotoIndex--;
                 showPhoto();
             }
         }
 
         function nextPhoto() {
-
-            if (
-                currentProject &&
-                currentPhotoIndex < currentProject.photographs.length - 1
-            ) {
+            if (currentProject && currentPhotoIndex < currentProject.photographs.length - 1) {
                 currentPhotoIndex++;
                 showPhoto();
             }
         }
 
-
-        /* ==================================================
-           WRITING VIEWER
-
-           Fetch the selected Markdown file, convert it to HTML,
-           then sanitize the result before inserting it into the page.
-        ================================================== */
-
-        let writingRequestId = 0;
-
         function showWriting() {
             currentPage = "writing";
-            setActiveNav("writing");
             currentWritingIndex = 0;
+            setActiveNav("writing");
             showWritingArticle();
         }
 
@@ -903,77 +454,50 @@
             currentPage = "writing";
             setActiveNav("writing");
 
-            const writing = writings[currentWritingIndex];
+            const writing = content.writings[currentWritingIndex];
             if (!writing) {
-                main.innerHTML = "";
+                main.innerHTML = '<p class="empty-state">No Markdown articles found. Add <code>.md</code> files to <code>writing/</code>, then run <code>python3 build_index.py</code>.</p>';
                 return;
             }
 
             const requestId = ++writingRequestId;
-
-            main.innerHTML = `
-                <div class="writing-viewer">
-                    <div class="writing-content">
-                        <p class="writing-status">Loading...</p>
-                    </div>
-                    <div class="writing-navigation">
-                        <button class="back-link" onclick="previousWriting()"
-                            ${currentWritingIndex === 0 ? "disabled" : ""}>Previous</button>
-                        <button class="back-link" onclick="nextWriting()"
-                            ${currentWritingIndex === writings.length - 1 ? "disabled" : ""}>Next</button>
-                    </div>
+            const navigation = `
+                <div class="writing-navigation">
+                    <button class="back-link" type="button" data-action="previous-writing" ${currentWritingIndex === 0 ? "disabled" : ""}>Previous</button>
+                    <button class="back-link" type="button" data-action="next-writing" ${currentWritingIndex === content.writings.length - 1 ? "disabled" : ""}>Next</button>
                 </div>
             `;
 
+            main.innerHTML = `
+                <div class="writing-viewer">
+                    <article class="writing-content"><p class="writing-status">Loading...</p></article>
+                    ${navigation}
+                </div>
+            `;
             window.scrollTo(0, 0);
 
             try {
-                const response = await fetch(writing.file);
-                if (!response.ok) {
-                    throw new Error(`Could not load ${writing.file} (${response.status})`);
-                }
+                const response = await fetch(writing.file, { cache: "no-cache" });
+                if (!response.ok) throw new Error(`Could not load ${writing.file} (${response.status})`);
 
                 const markdown = await response.text();
-
                 if (requestId !== writingRequestId || currentPage !== "writing") return;
 
                 if (!window.marked || !window.DOMPurify) {
-                    throw new Error("The Markdown libraries could not be loaded. Check your internet connection or CDN access.");
+                    throw new Error("The Markdown libraries could not be loaded. Check CDN access or your internet connection.");
                 }
 
-                const renderedHTML = window.marked.parse(markdown, {
-                    gfm: true,
-                    breaks: false
-                });
-
+                const renderedHTML = window.marked.parse(markdown, { gfm: true, breaks: false });
                 const safeHTML = window.DOMPurify.sanitize(renderedHTML, { USE_PROFILES: { html: true } });
 
-                main.innerHTML = `
-                    <div class="writing-viewer">
-                        <article class="writing-content">
-                            ${safeHTML}
-                        </article>
-
-                        <div class="writing-navigation">
-                            <button class="back-link" onclick="previousWriting()"
-                                ${currentWritingIndex === 0 ? "disabled" : ""}>Previous</button>
-                            <button class="back-link" onclick="nextWriting()"
-                                ${currentWritingIndex === writings.length - 1 ? "disabled" : ""}>Next</button>
-                        </div>
-                    </div>
-                `;
+                const article = main.querySelector(".writing-content");
+                if (article) article.innerHTML = safeHTML;
             } catch (error) {
                 if (requestId !== writingRequestId) return;
                 console.error(error);
-
-                const content = main.querySelector(".writing-content");
-                if (content) {
-                    content.innerHTML = `
-                        <p class="writing-error">
-                            Unable to load this article. Please check that the Markdown file exists at
-                            <code>${writing.file}</code> and that the site is being served over HTTP/HTTPS.
-                        </p>
-                    `;
+                const article = main.querySelector(".writing-content");
+                if (article) {
+                    article.innerHTML = `<p class="writing-error">Unable to load this article. Check that <code>${escapeHTML(writing.file)}</code> exists and that the site is served over HTTP/HTTPS.</p>`;
                 }
             }
         }
@@ -986,54 +510,89 @@
         }
 
         function nextWriting() {
-            if (currentWritingIndex < writings.length - 1) {
+            if (currentWritingIndex < content.writings.length - 1) {
                 currentWritingIndex++;
                 showWritingArticle();
             }
         }
 
-
-        /* ==================================================
-           KEYBOARD NAVIGATION
-        ================================================== */
-
-        document.addEventListener("keydown", function (event) {
-
-            if (currentPage === "photo") {
-
-                if (event.key === "ArrowLeft") {
-                    previousPhoto();
-                }
-
-                if (event.key === "ArrowRight") {
-                    nextPhoto();
-                }
+        // Event delegation keeps generated content free of inline event handlers.
+        main.addEventListener("click", event => {
+            const projectButton = event.target.closest("[data-project-id]");
+            if (projectButton) {
+                openProject(projectButton.dataset.projectId);
+                return;
             }
 
-            if (currentPage === "writing" && !event.metaKey && !event.ctrlKey && !event.altKey) {
+            const actionButton = event.target.closest("[data-action]");
+            if (!actionButton) return;
 
+            switch (actionButton.dataset.action) {
+                case "previous-photo": previousPhoto(); break;
+                case "next-photo": nextPhoto(); break;
+                case "previous-writing": previousWriting(); break;
+                case "next-writing": nextWriting(); break;
+            }
+        });
+
+        document.getElementById("nav-photography").addEventListener("click", event => {
+            event.preventDefault();
+            showPhotography();
+        });
+
+        document.getElementById("nav-writing").addEventListener("click", event => {
+            event.preventDefault();
+            showWriting();
+        });
+
+        document.getElementById("home-link").addEventListener("click", event => {
+            event.preventDefault();
+            showPhotography();
+        });
+
+        document.addEventListener("keydown", event => {
+            const tag = document.activeElement?.tagName;
+            if (["INPUT", "TEXTAREA", "SELECT"].includes(tag) || document.activeElement?.isContentEditable) return;
+
+            if (currentPage === "photo") {
+                if (event.key === "ArrowLeft") previousPhoto();
+                if (event.key === "ArrowRight") nextPhoto();
+            } else if (currentPage === "writing" && !event.metaKey && !event.ctrlKey && !event.altKey) {
                 if (event.key === "ArrowLeft") {
                     event.preventDefault();
                     previousWriting();
                 }
-
                 if (event.key === "ArrowRight") {
                     event.preventDefault();
                     nextWriting();
                 }
             }
-
         });
 
+        async function initializeSite() {
+            try {
+                const response = await fetch(CONTENT_INDEX, { cache: "no-cache" });
+                if (!response.ok) throw new Error(`Could not load content.json (${response.status})`);
+                const data = await response.json();
 
-        /* ==================================================
-           INITIAL PAGE
-        ================================================== */
+                content = {
+                    projects: Array.isArray(data.projects) ? data.projects : [],
+                    writings: Array.isArray(data.writings) ? data.writings : []
+                };
+                showPhotography();
+            } catch (error) {
+                console.error(error);
+                main.innerHTML = `
+                    <div class="load-error">
+                        <p>Unable to load the content index.</p>
+                        <p>Run <code>python3 build_index.py</code> in the website folder to create <code>content.json</code>, then reload this page.</p>
+                        <p>Details: ${escapeHTML(error.message)}</p>
+                    </div>
+                `;
+            }
+        }
 
-        showPhotography();
-
+        initializeSite();
     </script>
-
 </body>
-
 </html>
