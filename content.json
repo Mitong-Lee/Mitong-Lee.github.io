@@ -1,0 +1,507 @@
+{
+  "projects": [
+    {
+      "id": "28mm",
+      "title": "28mm",
+      "cover": "./image/28mm/cover.webp",
+      "info": "",
+      "photographs": [
+        {
+          "src": "./image/28mm/HK-July26/01.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/02.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/03.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/04.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/05.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/06.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/07.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/08.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/HK-July26/09.webp",
+          "info": "Hongkong, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/Kyoto-Feb26/01.webp",
+          "info": "Kyoto, Osaka & Nara, Feb. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/Kyoto-Feb26/02.webp",
+          "info": "Kyoto, Osaka & Nara, Feb. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/Kyoto-Feb26/03.webp",
+          "info": "Kyoto, Osaka & Nara, Feb. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/Kyoto-Feb26/04.webp",
+          "info": "Kyoto, Osaka & Nara, Feb. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/Kyoto-Feb26/05.webp",
+          "info": "Kyoto, Osaka & Nara, Feb. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SG-July26/01.webp",
+          "info": "Singapore, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SG-July26/02.webp",
+          "info": "Singapore, July. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/01.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/02.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/03.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/04.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/05.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/06.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/07.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/08.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/09.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/10.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/11.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/12.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/13.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/14.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/15.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/16.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/17.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/18.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/19.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/20.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/21.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/22.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/23.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/24.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/25.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/26.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Film/27.webp",
+          "info": "Shanghai, Unidentifiable date",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Nov26/01.webp",
+          "info": "Shanghai, Nov. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Nov26/02.webp",
+          "info": "Shanghai, Nov. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Nov26/03.webp",
+          "info": "Shanghai, Nov. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Oct26/01.webp",
+          "info": "Shanghai, Oct. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Oct26/02.webp",
+          "info": "Shanghai, Oct. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Oct26/03.webp",
+          "info": "Shanghai, Oct. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Oct26/04.webp",
+          "info": "Shanghai, Oct. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Oct26/05.webp",
+          "info": "Shanghai, Oct. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Oct26/06.webp",
+          "info": "Shanghai, Oct. 2026",
+          "alt": "28mm"
+        },
+        {
+          "src": "./image/28mm/SH-Oct26/07.webp",
+          "info": "Shanghai, Oct. 2026",
+          "alt": "28mm"
+        }
+      ]
+    },
+    {
+      "id": "standard",
+      "title": "standard",
+      "cover": "./image/standard/cover.webp",
+      "info": "",
+      "photographs": [
+        {
+          "src": "./image/standard/01.webp",
+          "info": "",
+          "alt": "standard"
+        },
+        {
+          "src": "./image/standard/02.webp",
+          "info": "",
+          "alt": "standard"
+        },
+        {
+          "src": "./image/standard/03.webp",
+          "info": "",
+          "alt": "standard"
+        },
+        {
+          "src": "./image/standard/04.webp",
+          "info": "",
+          "alt": "standard"
+        },
+        {
+          "src": "./image/standard/05.webp",
+          "info": "",
+          "alt": "standard"
+        },
+        {
+          "src": "./image/standard/06.webp",
+          "info": "",
+          "alt": "standard"
+        }
+      ]
+    },
+    {
+      "id": "winter",
+      "title": "winter",
+      "cover": "./image/winter/cover.webp",
+      "info": "",
+      "photographs": [
+        {
+          "src": "./image/winter/01.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/02.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/03.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/04.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/05.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/06.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/07.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/08.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/09.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/10.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/11.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/12.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/13.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/14.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/15.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/16.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/17.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/18.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/19.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/20.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/21.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/22.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/23.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/24.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/25.webp",
+          "info": "",
+          "alt": "winter"
+        },
+        {
+          "src": "./image/winter/26.webp",
+          "info": "",
+          "alt": "winter"
+        }
+      ]
+    }
+  ],
+  "writings": [
+    {
+      "title": "9 Meal Away From Anarchy",
+      "file": "./writing/112426-9MealAwayFromAnarchy.md"
+    },
+    {
+      "title": "criminal Underworld",
+      "file": "./writing/111726criminalUnderworld.md"
+    },
+    {
+      "title": "Mamdani&SRG",
+      "file": "./writing/111726Mamdani&SRG.md"
+    },
+    {
+      "title": "midterms ROver",
+      "file": "./writing/111126midtermsROver.md"
+    },
+    {
+      "title": "Russo Nazi Polka",
+      "file": "./writing/111126RussoNaziPolka.md"
+    },
+    {
+      "title": "HK&Greece",
+      "file": "./writing/110726HK&Greece.md"
+    },
+    {
+      "title": "jokes About Hitler",
+      "file": "./writing/110526jokesAboutHitler.md"
+    },
+    {
+      "title": "Turmp Midterm",
+      "file": "./writing/110526TurmpMidterm.md"
+    },
+    {
+      "title": "Slavery White Degrade",
+      "file": "./writing/110426SlaveryWhiteDegrade.md"
+    },
+    {
+      "title": "end Impunity4 Crimes Against Journalists",
+      "file": "./writing/110226endImpunity4CrimesAgainstJournalists.md"
+    },
+    {
+      "title": "join The Union",
+      "file": "./writing/102826joinTheUnion.md"
+    },
+    {
+      "title": "fight For Authenticity",
+      "file": "./writing/060326fightForAuthenticity.md"
+    },
+    {
+      "title": "the Rise Of Fascism",
+      "file": "./writing/112425theRiseOfFascism.md"
+    }
+  ]
+}
